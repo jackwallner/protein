@@ -425,6 +425,61 @@ formatter entry points are `trackedHeadline`, `compactTracked`,
 `targetCaption`, and `gaugeValue`/`gaugeGrams`, and the last two dropped their
 `target:` argument, because a total needs no target to stay honest.
 
+## Rejected 4.3, resubmitted 2026-09-01
+
+Build 20 was rejected under **guideline 4.3 (spam)**: "similar binary, metadata,
+and/or concept as apps submitted by other developers, with only minor
+differences." Nothing in the binary changed for the resubmission. Four things
+were wrong around it, and all four are fixed.
+
+**The repo did not exist.** `~/protein` was renamed to `~/caffeine` in
+`bed4b25` ("pivot protein tracker to caffeine planner"), which left this app
+with a rejected 1.0 and no working tree. Restored from `cc976b4`, the commit
+before the pivot, and pushed to github.com/jackwallner/protein.
+
+**All three URLs 404'd**, which is an automatic 5.1.1 rejection on its own and
+would have wasted the resubmission. Deleting the repo took the Pages site with
+it. Pages is re-enabled on `main` `/docs`; privacy, support, marketing, and
+terms all return 200. `asc-readiness.py` checks these, so run it before every
+submit: it is the one gap the API cannot infer from the version record.
+
+**Every product was available in zero territories.** The two subscriptions and
+the lifetime IAP each read "0 of 175 countries or regions selected", the IAP
+with **Remove from Sale** actively set, while all of them still reported
+`READY_TO_SUBMIT` and `asc-readiness.py` reported no gaps. Prices were intact
+(monthly $5.99, yearly $29.99, lifetime $59.99, with the PPP overrides), only
+availability was wiped, most likely when the products were unstuck from the
+August submission. A device build would have rendered a paywall with nothing
+purchasable. **Availability is not visible to this API key** (`/v1/inAppPurchases/{id}/inAppPurchaseAvailability`
+and `/v1/subscriptions/{id}/availableTerritories` both 404), so nothing in the
+repo can catch this. Check it by eye in ASC after any product surgery.
+
+**A subscription group is not a submittable item by itself.** Adding the group
+left the submit button dead with "New subscription groups must be submitted
+with an auto-renewable subscription from within that group". Each subscription
+has to be added individually from its own page, so the submission carries five
+items: the version, the group, both subscriptions, and the lifetime IAP.
+
+The App Review notes now open with a **4.3 section** naming what is particular
+to this app and where a reviewer sees it in under a minute (the Sources screen's
+per-app HealthKit attribution, HealthKit as the store rather than a mirror,
+target history, and the deliberate absence of a food database), and ask Apple to
+name the app it was matched against. Notes cap at 4000 characters; the current
+set is 3096. They live only in ASC, so re-read them after any change to what is
+paid.
+
+Submission `87df25c6` went in at 21:54 UTC on 2026-09-01, five items,
+`WAITING_FOR_REVIEW`, build 20, manual release.
+
+**RevenueCat moved to its own project.** `proj2da5e398` was renamed *Caffeine*
+during the pivot and still holds both apps' products. Protein now points at
+`proj6681ebb5` with public key `appl_afIOVjPptziekOgZJRrBVzuddka`;
+`rc-setup.py` created the three products, the `Protein+` entitlement, and the
+`default` offering with all three packages, verified through the public
+offerings endpoint the app actually calls. The v2 API now **rejects
+`is_current` on offering creation**, so marking the offering current is a
+separate step.
+
 ## Open risks (carried from `docs/plan.md` §8)
 1. **The HealthKit import test has never been run on a real device.** Whether
    MacroFactor / Cronometer / MyFitnessPal actually write readable

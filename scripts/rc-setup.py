@@ -194,10 +194,43 @@ def ensure_offering(project_id: str) -> dict:
     offering = request(
         "POST",
         f"/projects/{project_id}/offerings",
-        {"lookup_key": "default", "display_name": "Protein+", "is_current": True},
+        {"lookup_key": "default", "display_name": "Protein+"},
     )
     print("  created offering 'default'")
+    make_current(project_id, offering)
     return offering
+
+
+def make_current(project_id: str, offering: dict) -> None:
+    """Mark the offering current.
+
+    Creation used to accept `is_current`; the live v2 API now 400s on it
+    ("Additional properties are not allowed"), so it is a separate step. The
+    app reads `.current`, so skipping this leaves the paywall empty even with
+    every package attached.
+    """
+    if offering.get("id") == "dry-run":
+        print("  [dry-run] would mark 'default' current")
+        return
+    try:
+        request(
+            "POST",
+            f"/projects/{project_id}/offerings/{offering['id']}/actions/make_current",
+        )
+        print("  marked 'default' current")
+        return
+    except RuntimeError:
+        pass
+    try:
+        request(
+            "PATCH",
+            f"/projects/{project_id}/offerings/{offering['id']}",
+            {"is_current": True},
+        )
+        print("  marked 'default' current")
+    except RuntimeError as error:
+        print(f"  WARNING: could not mark 'default' current ({error}).")
+        print("           Set it in the dashboard or the paywall stays empty.")
 
 
 def ensure_packages(project_id: str, offering: dict, products: dict[str, dict]) -> None:

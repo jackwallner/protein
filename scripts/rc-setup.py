@@ -43,7 +43,7 @@ ENTITLEMENT_KEY = "Protein+"
 ENTITLEMENT_NAME = "Protein+"
 # Mirrors RevenueCatConfig.publicSDKKey; the run warns if the project hands back
 # a different production key, which would mean the binary talks to another app.
-EXPECTED_PUBLIC_KEY = "appl_LfYULlAJcjwywvqePrhAlZloCtF"
+EXPECTED_PUBLIC_KEY = "appl_afIOVjPptziekOgZJRrBVzuddka"
 
 # (store identifier, display name, RC product type, offering package key)
 PRODUCTS = (

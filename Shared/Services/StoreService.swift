@@ -7,7 +7,7 @@ import WidgetKit
 
 enum RevenueCatConfig {
     /// Public iOS SDK key. Secret `sk_` keys must never ship in an app binary.
-    static let publicSDKKey = "appl_LfYULlAJcjwywvqePrhAlZloCtF"
+    static let publicSDKKey = "appl_afIOVjPptziekOgZJRrBVzuddka"
     /// Entitlement lookup key in RevenueCat. Must stay `Protein+`, which is what
     /// the dashboard actually has; `isPro` gates on any active entitlement, so a
     /// mismatch here would go unnoticed until someone reads this constant.

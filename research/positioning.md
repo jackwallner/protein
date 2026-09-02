@@ -1,6 +1,6 @@
 # Protein app — positioning decisions
 
-> Decided 2026-08-04 by Jack. This is the locked direction. `README.md` = HealthKit dossier, `aso-plan.md` = keyword reality, `docs/scoping.md` = build cost, `research/competitors.md` = competitor detail.
+> Decided 2026-08-04 by Jack. This is the locked direction. `README.md` = HealthKit dossier, `aso-plan.md` = keyword reality, `research/scoping.md` = build cost, `research/competitors.md` = competitor detail.
 
 ---
 

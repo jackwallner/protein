@@ -89,7 +89,7 @@ Note this test does **not** gate Option B, where the user is likely not running 
 
 ## 5. Decisions (2026-08-04)
 
-Resolved by Jack. See `docs/positioning.md` for rationale.
+Resolved by Jack. See `research/positioning.md` for rationale.
 
 | Question | Answer |
 |---|---|

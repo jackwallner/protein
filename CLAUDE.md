@@ -23,7 +23,7 @@ paired-watch lease).
 ## Architecture
 
 **HealthKit is the single source of truth, including for our own entries.**
-This is the one decision the rest of the app hangs off (`docs/plan.md` §4):
+This is the one decision the rest of the app hangs off (`research/plan.md` §4):
 
 ```
 log 30g on wrist  →  HKQuantitySample(.dietaryProtein, 30g, source = us)
@@ -116,7 +116,7 @@ they are what the day was actually reconciled against.
 
 Access model: **one StoreKit trial**, decided 2026-08-04. The offer sheet is the
 final onboarding step and StoreKit owns the 7 days. There is no separate local
-trial window — `docs/plan.md` §7 flagged the stacked alternative and it was
+trial window — `research/plan.md` §7 flagged the stacked alternative and it was
 rejected.
 
 ## App-specific notes
@@ -480,7 +480,7 @@ offerings endpoint the app actually calls. The v2 API now **rejects
 `is_current` on offering creation**, so marking the offering current is a
 separate step.
 
-## Open risks (carried from `docs/plan.md` §8)
+## Open risks (carried from `research/plan.md` §8)
 1. **The HealthKit import test has never been run on a real device.** Whether
    MacroFactor / Cronometer / MyFitnessPal actually write readable
    `dietaryProtein` is unverified. If they mostly do not, the Sources screen

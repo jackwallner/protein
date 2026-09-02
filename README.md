@@ -9,10 +9,10 @@ and the record of how the direction was reached.
 | Doc | What it holds |
 |---|---|
 | `CLAUDE.md` | **The built app.** Architecture, free/Protein+ split, gotchas, open risks. |
-| `docs/positioning.md` | **The locked direction.** Start here. |
-| `docs/plan.md` | **The build plan.** Targets, port map, phases, open risks. |
+| `research/positioning.md` | **The locked direction.** Start here. |
+| `research/plan.md` | **The build plan.** Targets, port map, phases, open risks. |
 | `aso-plan.md` | Measured keyword reality. The protein category is a one-keyword category. |
-| `docs/scoping.md` | What reuses from Vitals, what is genuinely new, what v1 costs |
+| `research/scoping.md` | What reuses from Vitals, what is genuinely new, what v1 costs |
 | `research/competitors.md` | 15 protein-only competitors, watch-gap audit, pricing, audience evidence |
 | This file | HealthKit dossier and implementation shape — still the reference for `dietaryProtein` work |
 

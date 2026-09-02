@@ -171,7 +171,7 @@ These are mutually exclusive at the metadata level. Pick before building.
 
 ### DECIDED 2026-08-04: Option 1
 
-Take the position Protein Pal is vacating. Fight `protein tracker` on execution rather than keyword muscle, with `track protein` (pop 19 / diff 46) as the realistic near-term rank. Audience stories (lifter / GLP-1 / post-bariatric) live in screenshots and description; `bariatric` goes in the keyword field as the one above-floor audience term. Full rationale in `docs/positioning.md`.
+Take the position Protein Pal is vacating. Fight `protein tracker` on execution rather than keyword muscle, with `track protein` (pop 19 / diff 46) as the realistic near-term rank. Audience stories (lifter / GLP-1 / post-bariatric) live in screenshots and description; `bariatric` goes in the keyword field as the one above-floor audience term. Full rationale in `research/positioning.md`.
 
 **Metadata consequences to honor:**
 

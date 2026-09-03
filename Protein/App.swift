@@ -11,6 +11,16 @@ struct ProteinApp: App {
         // `App.init()` is main-actor isolated, so the @MainActor trackers are
         // safe to touch here.
         ReviewPromptTracker.recordAppLaunch()
+        ConversionDiagnostics.recordAppOpen()
+        #if DEBUG
+        if RevenueCatProbe.isEnabled {
+            // The impression hook needs a configured SDK, and configure happens
+            // in `start()`, so the probe does that first. After it, this is the
+            // same entry point the real paywall screens call.
+            StoreService.shared.start()
+            StoreService.shared.trackPaywallImpression(id: RevenueCatProbe.impressionID)
+        }
+        #endif
         WatchSyncService.shared.start()
     }
 

@@ -22,6 +22,18 @@ packages:
     from: 5.14.0
 
 schemes:
+  ProteinUITests:
+    build:
+      targets:
+        Protein: all
+        ProteinUITests: [test]
+    test:
+      config: Debug
+      targets:
+        - ProteinUITests
+    run:
+      config: Debug
+
   Protein:
     build:
       targets:
@@ -149,3 +161,20 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.jackwallner.protein.tests
     dependencies:
       - target: Protein
+
+  # The paywall purchase probe. Its own target and scheme: the app's own test
+  # action activates StoreKit Testing, and this has to reach RevenueCat's Test
+  # Store instead.
+  ProteinUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: ProteinUITests
+    dependencies:
+      - target: Protein
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.jackwallner.protein.uitests
+        TEST_TARGET_NAME: Protein
+

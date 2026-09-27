@@ -79,10 +79,10 @@ These files load automatically when you read a file matching their `paths:`. Age
   the target you were given". Never "we set your medical target". Two unit tests
   (`testReasonCopyMakesNoMedicalClaims`, `testCombinedRationaleMakesNoMedicalClaims`)
   fail the build on treat/cure/diagnose/prescribe/prevent appearing in the
-  audience copy, the second across all 16 reason combinations — keep it that way.
+  audience copy, the second across all 16 reason combinations. Keep it that way.
 - **Positioning is anti-AI on purpose.** No photo estimation, no food database,
   no calories, no macros beyond protein. That is the product, not a backlog.
-- Never put `calorie`, `macro`, `AI`, or `scanner` in the subtitle — those steer
+- Never put `calorie`, `macro`, `AI`, or `scanner` in the subtitle. Those steer
   Apple toward difficulty 73-81 SERPs and contradict the position (`aso-plan.md` §5).
 - `ScreenshotFixtures` (DEBUG) backs `-SeedScreenshotData` / `-ScreenshotTab N`
   / `-PaywallSnapshot`. `StoreService` hydrates the paywall on the simulator from

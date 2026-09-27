@@ -12,7 +12,7 @@ paths:
 
 # Protein: the watch, widgets, complications and the hero number
 
-Moved verbatim from CLAUDE.md. Loads when a matching file is read; update it here.
+Moved verbatim from AGENTS.md. Loads when a matching file is read; update it here.
 
 ### Watch layout and the complication glyph
 

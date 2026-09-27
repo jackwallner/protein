@@ -10,7 +10,7 @@ paths:
 
 # Protein: release and submission history
 
-Moved verbatim from CLAUDE.md. Dated snapshots: verify against ASC and `scripts/asc-readiness.py` before trusting any state here. Loads when a matching file is read; update it here.
+Moved verbatim from AGENTS.md. Dated snapshots: verify against ASC and `scripts/asc-readiness.py` before trusting any state here. Loads when a matching file is read; update it here.
 
 ## Release state (2026-08-16)
 

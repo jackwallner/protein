@@ -13,7 +13,7 @@ paths:
 
 # Protein: HealthKit as the store, and what follows from it
 
-Moved verbatim from CLAUDE.md. Loads when a matching file is read; update it here.
+Moved verbatim from AGENTS.md. Loads when a matching file is read; update it here.
 
 Consequences, all deliberate:
 - **No WatchConnectivity queue for entries.** HealthKit syncs across the paired

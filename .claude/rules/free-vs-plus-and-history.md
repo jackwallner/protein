@@ -17,7 +17,7 @@ paths:
 
 # Protein: free vs Protein+, history, and target changes
 
-Moved verbatim from CLAUDE.md. Loads when a matching file is read; update it here.
+Moved verbatim from AGENTS.md. Loads when a matching file is read; update it here.
 
 ## Free vs Protein+
 

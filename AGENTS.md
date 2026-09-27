@@ -1,4 +1,4 @@
-# Protein Tracker — Project Guide
+# Protein Tracker Project Guide
 
 Pure protein tracking: one gram target, one number, wrist-first. XcodeGen
 project/scheme: `Protein`, sim lease owner `protein` (`protein-watch` for a
@@ -12,11 +12,11 @@ paired-watch lease).
 - RevenueCat, entitlement lookup key `Protein+` (same string as the branding)
 
 ## Targets / bundle IDs
-- `Protein` — `com.jackwallner.protein`
-- `ProteinWidget` — `com.jackwallner.protein.widget`
-- `ProteinWatch` — `com.jackwallner.protein.watch`
-- `ProteinWatchWidget` — `com.jackwallner.protein.watch.widget`
-- `ProteinTests` — `com.jackwallner.protein.tests`
+- `Protein`: `com.jackwallner.protein`
+- `ProteinWidget`: `com.jackwallner.protein.widget`
+- `ProteinWatch`: `com.jackwallner.protein.watch`
+- `ProteinWatchWidget`: `com.jackwallner.protein.watch.widget`
+- `ProteinTests`: `com.jackwallner.protein.tests`
 - App Group `group.com.jackwallner.protein`
 - ASC record `6797089333`
 
@@ -37,13 +37,13 @@ multi-source rules. It is the only part verifiable without a real device and
 two food loggers, so it is the part that is unit tested hard.
 
 Key files:
-- `Shared/Utilities/ProteinReconciliation.swift` — totals, per-source rows, duplicate risk
-- `Shared/Services/HealthKitService.swift` — read/write/auth/observer/cache
-- `Shared/Services/ProteinLogService.swift` — log, undo, write-denied fallback
-- `Shared/Services/WatchSyncService.swift` — settings mirror, phone → watch
-- `Shared/Utilities/ProteinTargets.swift` — the audience fork's target maths
-- `Shared/Utilities/ProteinInsights.swift` — streaks, days on target, month-on-month
-- `Shared/Services/TargetHistoryService.swift` — what a target change does to past days
+- `Shared/Utilities/ProteinReconciliation.swift`: totals, per-source rows, duplicate risk
+- `Shared/Services/HealthKitService.swift`: read/write/auth/observer/cache
+- `Shared/Services/ProteinLogService.swift`: log, undo, write-denied fallback
+- `Shared/Services/WatchSyncService.swift`: settings mirror, phone → watch
+- `Shared/Utilities/ProteinTargets.swift`: the audience fork's target maths
+- `Shared/Utilities/ProteinInsights.swift`: streaks, days on target, month-on-month
+- `Shared/Services/TargetHistoryService.swift`: what a target change does to past days
 
 ## Rules that hold everywhere
 Condensed from the deep notes below; the reasoning and the history behind each one live there.
@@ -60,7 +60,7 @@ Condensed from the deep notes below; the reasoning and the history behind each o
 - RevenueCat is project `proj6681ebb5`; `proj2da5e398` belongs to Caffeine now.
 
 ## Deep notes (load on demand)
-These files load automatically when you read a file matching their `paths:`. Agents that do not auto-load rules (AGENTS.md readers) should open the file for the area they are touching. Record new area-specific learnings in the matching file, not here.
+These files load automatically when you read a file matching their `paths:`. Agents that do not auto-load rules (Codex, Cursor) should open the file for the area they are touching. Record new area-specific learnings in the matching file, not here.
 
 | File | Sections | Read when |
 |---|---|---|
@@ -101,4 +101,4 @@ These files load automatically when you read a file matching their `paths:`. Age
 
 ---
 Shared iOS conventions (build, simulator, release/TestFlight, ASC key, signing,
-review funnel, gotchas): always-loaded global CLAUDE.md + the `ios-dev` skill.
+review funnel, gotchas): the global agent rules + the `ios-dev` skill.

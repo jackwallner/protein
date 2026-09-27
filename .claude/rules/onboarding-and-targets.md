@@ -9,7 +9,7 @@ paths:
 
 # Protein: onboarding reasons and the target
 
-Moved verbatim from CLAUDE.md. Loads when a matching file is read; update it here.
+Moved verbatim from AGENTS.md. Loads when a matching file is read; update it here.
 
 ### Reasons are multi-select
 

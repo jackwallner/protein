@@ -1,6 +1,6 @@
 # Protein app — build scoping
 
-> Written 2026-08-04. Companion to `README.md` (product/HealthKit dossier) and `aso-plan.md` (market reality).
+> Written 2026-08-04. Companion to `README.md` (product/HealthKit dossier) and `../project-docs/marketing/aso-plan.md` (market reality).
 > Nothing here commits to a positioning. It costs out the options.
 
 ---

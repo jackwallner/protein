@@ -1,7 +1,7 @@
 ---
 paths:
   - "fastlane/**/*"
-  - "aso-plan.md"
+  - "project-docs/marketing/aso-plan.md"
   - "scripts/asc-upload-localizations.py"
   - "scripts/asc-rename-plus-branding.py"
   - "scripts/asc-setup-subscriptions.py"
@@ -23,7 +23,7 @@ Moved verbatim from AGENTS.md. Loads when a matching file is read; update it her
   on zero demand; and `Apple Watch` is an Apple trademark that metadata rules
   keep out of the name and subtitle. The shipped `on Watch` says it safely.
   `glp1` stays out of the keyword field for the same floor-demand reason.
-  Shipped name/subtitle/keywords and the full rationale: `aso-plan.md` §7.
+  Shipped name/subtitle/keywords and the full rationale: `project-docs/marketing/aso-plan.md` §7.
 - **The subtitle's job is the `track` token** (changed 2026-08-16, all 50
   locales). `Daily intake goal, on Watch` became `Track daily intake on Watch`,
   same 27 characters. Nothing in the metadata carried the bare `track`, only
@@ -67,7 +67,7 @@ Protein shipped its first metadata in en-US only, and was the only app in the
 fleet doing so: VO2 Max, Simple GLP, and Sober all carry 50 translated
 `appStoreVersionLocalizations` and 50 `appInfoLocalizations`. Forty-nine empty
 keyword fields, at 100 characters each, is the part that costs something, in an
-app where `aso-plan.md` already calls keyword volume the binding constraint.
+app where `project-docs/marketing/aso-plan.md` already calls keyword volume the binding constraint.
 
 `fastlane/metadata/<locale>/` now holds name, subtitle, keywords, description,
 promo text, and release notes for all 50, pushed by

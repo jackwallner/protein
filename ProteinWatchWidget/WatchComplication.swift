@@ -34,7 +34,7 @@ struct WatchProteinProvider: TimelineProvider {
     /// Reads the App Group cache the watch app writes when it reconciles. The
     /// complication deliberately keeps working whether or not Protein+ is
     /// active — it costs nothing, and taking the number away is what earns the
-    /// one-star reviews the clones in `aso-plan.md` collect.
+    /// one-star reviews the clones in `project-docs/marketing/aso-plan.md` collect.
     @MainActor
     private func loadEntry() -> WatchProteinEntry {
         let defaults = UserDefaults(suiteName: proteinAppGroupID) ?? .standard

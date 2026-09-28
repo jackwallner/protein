@@ -11,7 +11,7 @@ and the record of how the direction was reached.
 | `CLAUDE.md` | **The built app.** Architecture, free/Protein+ split, gotchas, open risks. |
 | `research/positioning.md` | **The locked direction.** Start here. |
 | `research/plan.md` | **The build plan.** Targets, port map, phases, open risks. |
-| `aso-plan.md` | Measured keyword reality. The protein category is a one-keyword category. |
+| `project-docs/marketing/aso-plan.md` | Measured keyword reality. The protein category is a one-keyword category. |
 | `research/scoping.md` | What reuses from Vitals, what is genuinely new, what v1 costs |
 | `research/competitors.md` | 15 protein-only competitors, watch-gap audit, pricing, audience evidence |
 | This file | HealthKit dossier and implementation shape — still the reference for `dietaryProtein` work |
@@ -19,7 +19,7 @@ and the record of how the direction was reached.
 **Corrections to this file as of 2026-08-04:**
 
 - The competitor map understates MacroFactor. It shipped a real Watch app (v5.4.0, 2025-09-09) and per its own site ships protein/carb/fiber complications plus wrist voice logging. "First to put protein on the wrist" is no longer available as a claim.
-- The watch-first thesis below is sound as a **product** bet but is not an **ASO** bet: every Watch keyword measures at the popularity floor. See `aso-plan.md`.
+- The watch-first thesis below is sound as a **product** bet but is not an **ASO** bet: every Watch keyword measures at the popularity floor. See `project-docs/marketing/aso-plan.md`.
 - The go/no-go test below (do two mainstream apps write `dietaryProtein`) is still worth running but is not the binding constraint. The binding constraint is keyword volume.
 
 ## Recommendation

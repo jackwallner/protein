@@ -1,6 +1,6 @@
 # Protein app — positioning decisions
 
-> Decided 2026-08-04 by Jack. This is the locked direction. `README.md` = HealthKit dossier, `aso-plan.md` = keyword reality, `research/scoping.md` = build cost, `research/competitors.md` = competitor detail.
+> Decided 2026-08-04 by Jack. This is the locked direction. `README.md` = HealthKit dossier, `../project-docs/marketing/aso-plan.md` = keyword reality, `research/scoping.md` = build cost, `research/competitors.md` = competitor detail.
 
 ---
 
@@ -91,7 +91,7 @@ Name:     Protein Tracker - <differentiator>
 Subtitle: <one number / wrist / no calorie counting>
 ```
 
-Do not lock this until the ProteinLoop check is done and the subtitle is SERP-validated per `aso-plan.md` §2.
+Do not lock this until the ProteinLoop check is done and the subtitle is SERP-validated per `../project-docs/marketing/aso-plan.md` §2.
 
 ---
 

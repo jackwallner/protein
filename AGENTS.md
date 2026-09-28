@@ -83,7 +83,7 @@ These files load automatically when you read a file matching their `paths:`. Age
 - **Positioning is anti-AI on purpose.** No photo estimation, no food database,
   no calories, no macros beyond protein. That is the product, not a backlog.
 - Never put `calorie`, `macro`, `AI`, or `scanner` in the subtitle. Those steer
-  Apple toward difficulty 73-81 SERPs and contradict the position (`aso-plan.md` §5).
+  Apple toward difficulty 73-81 SERPs and contradict the position (`project-docs/marketing/aso-plan.md` §5).
 - `ScreenshotFixtures` (DEBUG) backs `-SeedScreenshotData` / `-ScreenshotTab N`
   / `-PaywallSnapshot`. `StoreService` hydrates the paywall on the simulator from
   StoreKit Testing, falling back to `TestStoreProduct` fixtures, so the real
@@ -95,7 +95,7 @@ These files load automatically when you read a file matching their `paths:`. Age
    `dietaryProtein` is unverified. If they mostly do not, the Sources screen
    degrades to a near-empty list and the import claim has to come off the
    product page before submission.
-2. Keyword volume is the binding constraint, not the build (`aso-plan.md`).
+2. Keyword volume is the binding constraint, not the build (`project-docs/marketing/aso-plan.md`).
 3. PROTEIN PAL is a registered mark. Only a Justia search was run, never a real
    USPTO clearance.
 

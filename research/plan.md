@@ -1,6 +1,6 @@
 # Protein Tracker - build plan
 
-> Written 2026-08-04. Companion to `research/positioning.md` (locked direction), `research/scoping.md` (cost of the options), `aso-plan.md` (keyword reality), `research/competitors.md`, `README.md` (HealthKit dossier).
+> Written 2026-08-04. Companion to `research/positioning.md` (locked direction), `research/scoping.md` (cost of the options), `../project-docs/marketing/aso-plan.md` (keyword reality), `research/competitors.md`, `README.md` (HealthKit dossier).
 > This doc is the build. Nothing here reopens a positioning decision.
 
 ---

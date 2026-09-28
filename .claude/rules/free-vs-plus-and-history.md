@@ -47,7 +47,7 @@ reverting their buttons would be a punishment for cancelling.
 
 The complication keeps updating for free users on purpose. It costs nothing and
 it is what keeps the app on the wrist while they reconsider; the graveyard
-clones in `aso-plan.md` collect one-star reviews for taking everything away.
+clones in `project-docs/marketing/aso-plan.md` collect one-star reviews for taking everything away.
 
 **Tabs are Today, History, Protein+, Settings.** The Protein+ tab is an embedded
 paywall for free users (`impressionID: "protein_plus_tab"`) and the subscriber

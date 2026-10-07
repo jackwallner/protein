@@ -598,10 +598,8 @@ struct SettingsView: View {
 
     private var supportSection: some View {
         Section {
-            Button {
-                ReviewPromptCoordinator.shared.requestEnjoymentPrompt()
-            } label: {
-                Label("Rate Protein Tracker", systemImage: "star")
+            Link(destination: AppStoreReviewLinks.writeReviewURL) {
+                Label("Write a review on the App Store", systemImage: "star")
             }
             Button {
                 ReviewPromptCoordinator.shared.requestFeedback()

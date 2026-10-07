@@ -115,12 +115,9 @@ private struct MainTabView: View {
     @State private var showPaywallFromWhatsNew = false
     @State private var pendingPaywallAfterWhatsNew = false
 
-    // Review funnel
-    @State private var showReviewPrompt = false
-    @State private var reviewPromptInitialStep: ReviewPromptSheet.Step = .enjoyment
+    // Review prompt and feedback
+    @State private var showFeedback = false
     @State private var reviewPromptShownThisSession = false
-    /// Only the passive route has earned the "a few days running" claim.
-    @State private var reviewPromptEarned = true
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -156,13 +153,10 @@ private struct MainTabView: View {
             evaluateWhatsNew()
             evaluatePendingReviewPrompt()
         }
-        .onChange(of: reviewPromptCoordinator.pendingPresentation) { _, presentation in
-            guard let presentation else { return }
-            defer { reviewPromptCoordinator.clear() }
-            switch presentation {
-            case .enjoymentPrompt: presentReviewPrompt(step: .enjoyment, earned: false)
-            case .feedbackOnly: presentReviewPrompt(step: .feedback, earned: false)
-            }
+        .onChange(of: reviewPromptCoordinator.feedbackRequested) { _, requested in
+            guard requested else { return }
+            reviewPromptCoordinator.clear()
+            showFeedback = true
         }
         .sheet(isPresented: $showWhatsNew, onDismiss: {
             if pendingPaywallAfterWhatsNew {
@@ -184,20 +178,9 @@ private struct MainTabView: View {
         .sheet(isPresented: $showPaywallFromWhatsNew) {
             PaywallView().environmentObject(store)
         }
-        .sheet(isPresented: $showReviewPrompt, onDismiss: {
-            if reviewPromptCoordinator.pendingPresentation == nil,
-               ReviewPromptTracker.outcome == nil,
-               ReviewPromptTracker.isSoftDeferred {
-                // "Maybe later": Apple often no-ops requestReview(), so we keep
-                // a short cooldown rather than the long jail markShown() sets.
-                requestReview()
-            }
-        }) {
-            ReviewPromptSheet(
-                initialStep: reviewPromptInitialStep,
-                earnedByTargetHits: reviewPromptEarned
-            ) { _ in
-                showReviewPrompt = false
+        .sheet(isPresented: $showFeedback) {
+            ReviewPromptSheet { _ in
+                showFeedback = false
             }
         }
     }
@@ -207,17 +190,22 @@ private struct MainTabView: View {
               settings.hasCompletedSetup,
               !ScreenshotConfig.isEnabled,
               WhatsNew.shouldShow(lastShown: settings.lastWhatsNewVersionShown),
-              !showReviewPrompt else { return }
+              !showFeedback else { return }
         whatsNewEvaluated = true
         settings.lastWhatsNewVersionShown = WhatsNew.currentVersion
         showWhatsNew = true
     }
 
     private func evaluatePendingReviewPrompt() {
-        guard !reviewPromptShownThisSession, !showReviewPrompt, !showWhatsNew else { return }
+        guard !reviewPromptShownThisSession, !showFeedback, !showWhatsNew else { return }
         guard ReviewPromptTracker.shouldShowPassively(hasCompletedSetup: settings.hasCompletedSetup) else { return }
         ReviewPromptTracker.consumePendingMoment()
-        presentReviewPrompt(step: .enjoyment, earned: true)
+        reviewPromptShownThisSession = true
+        // Apple's own prompt, asked of everyone who qualifies, with no question
+        // first (guideline 5.6.1). It is rate-limited and often shows nothing,
+        // hence the short cooldown.
+        ReviewPromptTracker.markSoftDeferred()
+        requestReview()
     }
 
     private static var showsTabBar: Bool {
@@ -226,13 +214,6 @@ private struct MainTabView: View {
         #else
         return true
         #endif
-    }
-
-    private func presentReviewPrompt(step: ReviewPromptSheet.Step, earned: Bool) {
-        reviewPromptInitialStep = step
-        reviewPromptEarned = earned
-        reviewPromptShownThisSession = true
-        showReviewPrompt = true
     }
 
     /// All three tabs stay alive in the `ZStack` so each keeps its own scroll

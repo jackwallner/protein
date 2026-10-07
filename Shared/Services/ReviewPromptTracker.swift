@@ -8,7 +8,7 @@ enum ReviewPromptOutcome: String, Sendable {
     case submittedFeedback
 }
 
-/// Pure eligibility rules for the enjoyment funnel, kept free of `UserDefaults`
+/// Pure eligibility rules for the review prompt, kept free of `UserDefaults`
 /// so the thresholds can be unit-tested directly.
 ///
 /// The trigger is the third *day* the user hit their target, not the third tap
@@ -48,7 +48,7 @@ enum ReviewPromptTracker {
     private static let pendingMomentKey = "reviewPrompt.pendingMoment"
     private static let softDeferKey = "reviewPrompt.softDefer"
 
-    /// Days before "Not now" can surface the enjoyment prompt again.
+    /// Days before the review prompt can be asked again after "Not now".
     static let cooldownDays = 120
     /// Shorter cooldown after "Maybe later" on the review pitch — Apple's
     /// `requestReview()` often shows nothing, so a 120-day jail burns asks.
@@ -140,7 +140,7 @@ enum ReviewPromptTracker {
         return now.timeIntervalSince(last) >= TimeInterval(days) * 86_400
     }
 
-    /// Base eligibility for the enjoyment funnel (passive or from Settings).
+    /// Base eligibility for the passive review prompt.
     static func canPresentEnjoymentPrompt(hasCompletedSetup: Bool, now: Date = .now) -> Bool {
         guard !ScreenshotConfig.isEnabled else { return false }
         guard hasCompletedSetup else { return false }

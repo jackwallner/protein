@@ -1,188 +1,53 @@
 import SwiftUI
 import UIKit
 
-/// Manual presentation from Settings, which bypasses passive eligibility.
+/// Feedback is its own path, never a branch of a rating question. Guideline
+/// 5.6.1 rejects asking "Enjoying it?" and sending only the yes answers to the
+/// App Store, so ratings go straight to Apple's own prompt and this sheet only
+/// collects feedback, opened from Settings.
 @MainActor
 final class ReviewPromptCoordinator: ObservableObject {
     static let shared = ReviewPromptCoordinator()
 
-    enum Presentation {
-        case enjoymentPrompt
-        case feedbackOnly
-    }
-
-    @Published var pendingPresentation: Presentation?
+    @Published var feedbackRequested = false
 
     private init() {}
 
-    func requestEnjoymentPrompt() {
-        pendingPresentation = .enjoymentPrompt
-    }
-
     func requestFeedback() {
-        pendingPresentation = .feedbackOnly
+        feedbackRequested = true
     }
 
     func clear() {
-        pendingPresentation = nil
+        feedbackRequested = false
     }
 }
 
-/// Returned when the sheet closes so the host can call `requestReview()` if
-/// appropriate.
 enum ReviewPromptDismissOutcome: Sendable {
     case notNow
     case feedbackSubmitted
-    case openedWriteReview
-    /// User chose "Yes" but dismissed the pitch without opening the store — the
-    /// host may call `requestReview()` once in `onDismiss`.
-    case enjoyedMaybeLater
 }
 
 struct ReviewPromptSheet: View {
-    enum Step {
-        case enjoyment
-        case reviewPitch
-        case feedback
-    }
-
-    let initialStep: Step
-    /// True only when the funnel opened itself off the target-hit rule. The
-    /// Settings route bypasses that rule, so it must not claim a streak the
-    /// user may not have.
-    let earnedByTargetHits: Bool
     let onFinish: (ReviewPromptDismissOutcome) -> Void
 
     @Environment(\.dismiss) private var dismiss
-    @State private var step: Step
     @State private var feedbackText = ""
     @State private var mailFailed = false
-    @State private var storeFailed = false
     @FocusState private var feedbackFocused: Bool
-
-    init(
-        initialStep: Step = .enjoyment,
-        earnedByTargetHits: Bool = true,
-        onFinish: @escaping (ReviewPromptDismissOutcome) -> Void
-    ) {
-        self.initialStep = initialStep
-        self.earnedByTargetHits = earnedByTargetHits
-        self.onFinish = onFinish
-        _step = State(initialValue: initialStep)
-    }
 
     var body: some View {
         NavigationStack {
-            Group {
-                switch step {
-                case .enjoyment: enjoymentContent
-                case .reviewPitch: reviewPitchContent
-                case .feedback: feedbackContent
+            feedbackContent
+                .navigationTitle("Help us improve")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Not now") { finish(.notNow) }
+                    }
                 }
-            }
-            .navigationTitle(navigationTitle)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Not now") { handleNotNow() }
-                }
-            }
         }
-        .presentationDetents(step == .feedback ? [.large] : [.medium, .large])
+        .presentationDetents([.large])
         .presentationDragIndicator(.visible)
-    }
-
-    private var navigationTitle: String {
-        switch step {
-        case .enjoyment: "Hitting your number?"
-        case .reviewPitch: "Support an indie dev"
-        case .feedback: "Help us improve"
-        }
-    }
-
-    private var enjoymentContent: some View {
-        VStack(spacing: 20) {
-            ZStack {
-                Circle()
-                    .fill(Theme.proteinGradient)
-                    .frame(width: 64, height: 64)
-                Image(systemName: "checkmark")
-                    .font(.system(size: 26, weight: .bold))
-                    .foregroundStyle(.white)
-            }
-            .padding(.top, 8)
-
-            Text(earnedByTargetHits
-                 ? "You have hit your protein target a few days running. If this app is helping, a quick rating on the App Store makes a real difference."
-                 : "If Protein Tracker is helping you hit your number, a quick rating on the App Store makes a real difference.")
-                .font(.system(.subheadline, design: .rounded))
-                .foregroundStyle(Theme.textSecondary)
-                .multilineTextAlignment(.center)
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.horizontal, 8)
-
-            VStack(spacing: 10) {
-                Button {
-                    step = .reviewPitch
-                } label: {
-                    primaryButtonLabel("Yes, it's helping")
-                }
-                .buttonStyle(.plain)
-
-                Button {
-                    step = .feedback
-                } label: {
-                    secondaryButtonLabel("Not really")
-                }
-                .buttonStyle(.plain)
-            }
-        }
-        .padding(.horizontal, 24)
-        .padding(.bottom, 24)
-    }
-
-    private var reviewPitchContent: some View {
-        VStack(spacing: 18) {
-            Text("Protein Tracker is built by one indie developer, with no ads, no account with us, and no health data sent to the developer.")
-                .font(.system(.subheadline, design: .rounded))
-                .foregroundStyle(Theme.textSecondary)
-                .multilineTextAlignment(.center)
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.top, 8)
-
-            Text("An honest App Store review takes seconds, and it is how people looking for a simple protein target find this instead of another calorie app.")
-                .font(.system(.footnote, design: .rounded))
-                .foregroundStyle(Theme.textSecondary)
-                .multilineTextAlignment(.center)
-                .fixedSize(horizontal: false, vertical: true)
-
-            if storeFailed {
-                Text("The App Store could not be opened. Try again, or search for Protein Tracker in the App Store when you have a moment.")
-                    .font(.system(.caption, design: .rounded))
-                    .foregroundStyle(Theme.coral)
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-
-            VStack(spacing: 10) {
-                Button {
-                    openWriteReview()
-                } label: {
-                    primaryButtonLabel("Rate on the App Store")
-                }
-                .buttonStyle(.plain)
-
-                Button {
-                    ReviewPromptTracker.markSoftDeferred()
-                    finish(.enjoyedMaybeLater)
-                } label: {
-                    secondaryButtonLabel("Maybe later")
-                }
-                .buttonStyle(.plain)
-            }
-        }
-        .padding(.horizontal, 24)
-        .padding(.bottom, 24)
     }
 
     private var feedbackContent: some View {
@@ -235,36 +100,6 @@ struct ReviewPromptSheet: View {
             .frame(maxWidth: .infinity)
             .padding(.vertical, 14)
             .background(Theme.proteinGradient, in: Capsule())
-    }
-
-    private func secondaryButtonLabel(_ title: String) -> some View {
-        Text(title)
-            .font(.system(.subheadline, design: .rounded, weight: .semibold))
-            .foregroundStyle(Theme.textSecondary)
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 10)
-    }
-
-    private func handleNotNow() {
-        ReviewPromptTracker.markShown()
-        finish(.notNow)
-    }
-
-    /// Same standard as the mail handoff below: the review path is only "opened"
-    /// once iOS says it opened. Marking it first burned the user's one prompt on
-    /// a store that never appeared, under restrictions or a broken link.
-    private func openWriteReview() {
-        storeFailed = false
-        UIApplication.shared.open(AppStoreReviewLinks.writeReviewURL, options: [:]) { opened in
-            Task { @MainActor in
-                guard opened else {
-                    storeFailed = true
-                    return
-                }
-                ReviewPromptTracker.markOpenedWriteReview()
-                finish(.openedWriteReview)
-            }
-        }
     }
 
     /// Feedback is only "submitted" once iOS has actually handed the draft to a

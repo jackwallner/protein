@@ -4,6 +4,10 @@ Pure protein tracking: one gram target, one number, wrist-first. XcodeGen
 project/scheme: `Protein`, sim lease owner `protein` (`protein-watch` for a
 paired-watch lease).
 
+**Status:** the app was removed from App Store Connect on 2026-10-13 and the landing
+page no longer mirrors to jackwallner.com (2026-10-14). The repo is kept for
+reference; the ASC and release notes below are history, not live state.
+
 ## Tech Stack
 - Swift 6 / SwiftUI (strict concurrency)
 - HealthKit (`dietaryProtein`, read **and** write), SwiftData in an App Group,
